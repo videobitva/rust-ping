@@ -41,7 +41,7 @@ pub struct EchoRequest<'a> {
     pub payload: &'a [u8],
 }
 
-impl<'a> EchoRequest<'a> {
+impl EchoRequest<'_> {
     pub fn encode<P: Proto>(&self, buffer: &mut [u8]) -> Result<(), Error> {
         buffer[0] = P::ECHO_REQUEST_TYPE;
         buffer[1] = P::ECHO_REQUEST_CODE;
@@ -51,7 +51,7 @@ impl<'a> EchoRequest<'a> {
         buffer[6] = (self.seq_cnt >> 8) as u8;
         buffer[7] = self.seq_cnt as u8;
 
-        if let Err(_) = (&mut buffer[8..]).write(self.payload) {
+        if (&mut buffer[8..]).write(self.payload).is_err() {
             return Err(Error::InvalidSize);
         }
 
@@ -62,7 +62,9 @@ impl<'a> EchoRequest<'a> {
 
 pub struct EchoReply<'a> {
     pub ident: u16,
+    #[allow(dead_code)]
     pub seq_cnt: u16,
+    #[allow(dead_code)]
     pub payload: &'a [u8],
 }
 

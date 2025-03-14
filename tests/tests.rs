@@ -11,6 +11,8 @@ fn basic() {
     let timeout = Duration::from_secs(1);
     ping::ping(
         addr,
+        None,
+        None,
         Some(timeout),
         Some(166),
         Some(3),
@@ -26,6 +28,8 @@ fn basic_v6() {
     let timeout = Duration::from_secs(1);
     ping::ping(
         addr,
+        None,
+        None,
         Some(timeout),
         Some(166),
         Some(3),
@@ -42,6 +46,8 @@ fn basic_dgram() {
     let timeout = Duration::from_secs(1);
     ping::dgramsock::ping(
         addr,
+        None,
+        None,
         Some(timeout),
         Some(166),
         Some(3),
@@ -58,6 +64,8 @@ fn basic_dgram_v6() {
     let timeout = Duration::from_secs(1);
     ping::dgramsock::ping(
         addr,
+        None,
+        None,
         Some(timeout),
         Some(166),
         Some(3),
